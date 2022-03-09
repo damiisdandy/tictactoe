@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap");
+
+// variables
+$primary-color: rgb(113, 182, 113);
+$secondary-color: #dd930b;
+$mid-transition: all 300ms ease;
+$height-of-tile: calc(28rem / 3);
+
+@keyframes line-animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 10px;
+}
+
+html {
+  font-family: "Fredoka", sans-serif;
+  color: white;
+}
+
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #151515;
+  .title {
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .winner {
+    margin-bottom: 2rem;
+    h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      font-weight: 300;
+      .letter {
+        color: $primary-color;
+        font-size: inherit;
+        font-weight: 900;
+      }
+    }
+    button {
+      display: block;
+      margin: 0 auto;
+      background-color: $primary-color;
+      color: white;
+      padding: 1rem 3rem;
+      border-radius: 0.75rem;
+      margin-top: 1rem;
+      font-size: 1.8rem;
+      transition: $mid-transition;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.1);
+      }
+      &:active {
+        transform: scale(0.9);
+      }
+    }
+  }
+}
+
+.Board {
+  position: relative;
+  height: 30rem;
+  width: 30em;
+  background-color: #232323;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  .Tile {
+    background-color: #303030;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 6rem;
+    border-radius: 1rem;
+    &:hover {
+      cursor: pointer;
+      background-color: #404040;
+    }
+  }
+  .line {
+    animation-name: line-animation;
+    animation-duration: 500ms;
+    position: absolute;
+    opacity: 0.8;
+    left: 1rem;
+    background-color: $secondary-color;
+    height: 1.2rem;
+    border-radius: 0.75rem;
+    width: calc(30rem - 2rem);
+    min-width: 28rem;
+    transform-origin: 0 0;
+    &.htop {
+      top: calc(28rem / 6);
+    }
+    &.hmid {
+      top: calc(26rem / 6) + $height-of-tile + 1rem;
+    }
+    &.hbtm {
+      top: calc(28rem / 6) + $height-of-tile * 2 + 1.2rem;
+    }
+    &[class*="v"] {
+      transform: rotate(90deg);
+      top: 1rem;
+    }
+    &.vleft {
+      left: calc(28rem / 6) + 1rem;
+    }
+    &.vmid {
+      left: calc(28rem / 6) + $height-of-tile + 1.6rem;
+    }
+    &.vright {
+      left: calc(28rem / 6) + $height-of-tile * 2 + 2.2rem;
+    }
+    &.dright {
+      transform: rotate(45deg);
+      top: 1rem;
+      left: 1.4rem;
+      width: 39rem;
+    }
+    &.dleft {
+      width: 39rem;
+      transform: rotate(-45deg);
+      transform-origin: 100% 100%;
+      top: 0.7rem;
+      left: -1 * $height-of-tile;
+    }
+  }
+}
