@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import Board from "./components/Board";
-import ConfettiExplosion from "react-confetti-explosion";
 
 const allEqual = (arr: any[]) => arr.every((v) => v === arr[0]);
 
@@ -88,30 +87,27 @@ const App: FC = () => {
   }, [board]);
 
   return (
-    <>
-      {hasWinner && <ConfettiExplosion floorWidth={500} />}
-      <div className="App">
-        <div>
-          <h1 className="title">Tic Tac Toe</h1>
-          <div className="winner">
-            {hasWinner && (
-              <h2>
-                "<span className="letter">{turns % 2 === 0 ? "O" : "X"}</span>"
-                Won the game! 😃
-              </h2>
-            )}
-            <button onClick={resetBoard}>Reset board</button>
-          </div>
-
-          <Board
-            boardMap={board}
-            selectLocation={selectLocation}
-            hasWinner={hasWinner}
-            winType={winType}
-          />
+    <div className="App">
+      <div>
+        <h1 className="title">Tic Tac Toe</h1>
+        <div className="winner">
+          {hasWinner && (
+            <h2>
+              "<span className="letter">{turns % 2 === 0 ? "O" : "X"}</span>"
+              Won the game! 😃
+            </h2>
+          )}
+          <button onClick={resetBoard}>Reset board</button>
         </div>
+
+        <Board
+          boardMap={board}
+          selectLocation={selectLocation}
+          hasWinner={hasWinner}
+          winType={winType}
+        />
       </div>
-    </>
+    </div>
   );
 };
 
