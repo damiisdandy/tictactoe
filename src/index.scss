@@ -100,15 +100,21 @@ html {
     font-weight: 900;
     font-size: 6rem;
     border-radius: 1rem;
+    transition: $mid-transition;
     &:hover {
+      transform: scale(1.05);
       cursor: pointer;
       background-color: #404040;
+    }
+    &:active {
+      transform: scale(0.9);
     }
   }
   .line {
     animation-name: line-animation;
     animation-duration: 500ms;
     position: absolute;
+    z-index: 10;
     opacity: 0.8;
     left: 1rem;
     background-color: $secondary-color;

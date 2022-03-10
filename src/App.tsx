@@ -1,6 +1,7 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import Board from "./components/Board";
 
+// check if all elements of an array are equal
 const allEqual = (arr: any[]) => arr.every((v) => v === arr[0]);
 
 const App: FC = () => {
@@ -9,8 +10,7 @@ const App: FC = () => {
     [null, null, null],
     [null, null, null],
   ];
-
-  const [board, setBoard] = useState<BoardType>(INITIAL_STATE);
+  const [board, setBoard] = useState<BoardType>([...INITIAL_STATE]);
   const [turns, setTurns] = useState(0);
   const [hasWinner, setHasWinner] = useState(false);
   const [winType, setWinType] = useState<WinType>("");
@@ -26,8 +26,13 @@ const App: FC = () => {
     }
   };
 
+  const allSlotsTaken = useMemo(() => {
+    const boardArray = board.reduce((a, b) => [...a, ...b], []);
+    return !boardArray.includes(null);
+  }, [board]);
+
   const resetBoard = () => {
-    setBoard(INITIAL_STATE);
+    setBoard([...INITIAL_STATE]);
     setHasWinner(false);
     setTurns(0);
     setWinType("");
@@ -39,8 +44,8 @@ const App: FC = () => {
     for (let i = 0; i < board.length; i++) {
       let horizontalArray = [];
       let verticalArray = [];
-      rightDiagonalArray[i] = board[i][i];
-      leftDiagonalArray[i] = board[i][2 - i];
+      rightDiagonalArray[i] = board[i][i]; // [(0,0), (1,1), (2,2)]
+      leftDiagonalArray[i] = board[i][2 - i]; // [(0,2), (1,1), (2,0)]
       for (let j = 0; j < board[i].length; j++) {
         horizontalArray[j] = board[i][j];
         verticalArray[j] = board[j][i];
@@ -91,11 +96,13 @@ const App: FC = () => {
       <div>
         <h1 className="title">Tic Tac Toe</h1>
         <div className="winner">
-          {hasWinner && (
+          {hasWinner ? (
             <h2>
               "<span className="letter">{turns % 2 === 0 ? "O" : "X"}</span>"
               Won the game! 😃
             </h2>
+          ) : (
+            !hasWinner && allSlotsTaken && <h2>Draw! 😬</h2>
           )}
           <button onClick={resetBoard}>Reset board</button>
         </div>
