@@ -1,7 +1,8 @@
-import { FC } from "react";
 import { Link } from "react-router-dom";
+import useUser from "../../../hooks/useUser";
 
-const Navbar: FC<{ userName: string | null }> = ({ userName }) => {
+const Navbar = () => {
+  const { userName } = useUser();
   return (
     <div className="Navbar">
       <h1 className="title">Tic Tac Toe</h1>

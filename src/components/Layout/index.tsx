@@ -1,11 +1,18 @@
 import { FC } from "react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import { motion } from "framer-motion";
+import ChangeName from "../../pages/change-name";
+import useUI from "../../hooks/useUI";
 
-const Layout: FC<{ userName: string | null }> = ({ children, userName }) => {
+const Layout: FC = ({ children }) => {
+  const { UI } = useUI();
   return (
     <>
-      <Navbar userName={userName} />
+      <motion.div className={`backdrop ${UI.showBackdrop && "active"}`}>
+        <ChangeName />
+      </motion.div>
+      <Navbar />
       {children}
       <Footer />
     </>
