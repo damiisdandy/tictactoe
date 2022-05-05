@@ -33,6 +33,7 @@ interface Action {
 type ReducerType = (state: Store, action: Action) => Store;
 
 type UseUser = () => {
+  userID: string | null;
   userName: string | null;
   setUserName: (name: string) => void;
 }
@@ -40,4 +41,10 @@ type UseUser = () => {
 type UseUI = () => {
   UI: StoreUI;
   setShowBackdrop: (value: boolean) => void;
+}
+
+type UseMutate = (url: string, data: Object) => {
+  loading: boolean;
+  error: boolean;
+  data: Object;
 }

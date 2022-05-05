@@ -12,6 +12,7 @@ const useUser: UseUser = () => {
   };
 
   return {
+    userID: state.id,
     userName: state.userName,
     setUserName,
   };

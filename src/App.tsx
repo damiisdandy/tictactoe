@@ -3,6 +3,8 @@ import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import ChangeName from "./pages/change-name";
+import CreateGame from "./pages/game/create";
+import Game from "./pages/game/id";
 import Help from "./pages/help";
 import Home from "./pages/home";
 
@@ -21,6 +23,8 @@ const App: FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/change-name" element={<ChangeName change />} />
             <Route path="/help" element={<Help />} />
+            <Route path="/game/create" element={<CreateGame />} />
+            <Route path="/game/:id" element={<Game />} />
           </Routes>
         </AnimatePresence>
       </Layout>

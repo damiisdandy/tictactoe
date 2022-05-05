@@ -1,14 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
-import Board from "../components/Board";
+import { useParams } from "react-router-dom";
+import Board from "../../components/Board";
+import axios from "../../services/axios";
 
 const allEqual = (arr: any[]) => arr.every((v) => v === arr[0]);
 
 const Game = () => {
+  const { id } = useParams();
   const INITIAL_STATE = [
     [null, null, null],
     [null, null, null],
     [null, null, null],
   ];
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState({ status: false, message: "" });
   const [board, setBoard] = useState<BoardType>([...INITIAL_STATE]);
   const [turns, setTurns] = useState(0);
   const [hasWinner, setHasWinner] = useState(false);
@@ -89,26 +94,49 @@ const Game = () => {
       setWinType("dleft");
     }
   }, [board]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const game = await axios.get(`/game/${id}`);
+        console.log(game.data);
+      } catch {
+        setError({
+          status: true,
+          message: "Game does not exist",
+        });
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [id]);
   return (
     <div>
-      <div className="winner">
-        {hasWinner ? (
-          <h2>
-            "<span className="letter">{turns % 2 === 0 ? "O" : "X"}</span>" Won
-            the game! 😃
-          </h2>
-        ) : (
-          !hasWinner && allSlotsTaken && <h2>Draw! 😬</h2>
-        )}
-        <button onClick={resetBoard}>Reset board</button>
-      </div>
-
-      <Board
-        boardMap={board}
-        selectLocation={selectLocation}
-        hasWinner={hasWinner}
-        winType={winType}
-      />
+      {loading ? (
+        <>Loading...</>
+      ) : error.status ? (
+        <>Error... {error.message}</>
+      ) : (
+        <>
+          <div className="winner">
+            {hasWinner ? (
+              <h2>
+                "<span className="letter">{turns % 2 === 0 ? "O" : "X"}</span>"
+                Won the game! 😃
+              </h2>
+            ) : (
+              !hasWinner && allSlotsTaken && <h2>Draw! 😬</h2>
+            )}
+            <button onClick={resetBoard}>Reset board</button>
+          </div>
+          <Board
+            boardMap={board}
+            selectLocation={selectLocation}
+            hasWinner={hasWinner}
+            winType={winType}
+          />
+        </>
+      )}
     </div>
   );
 };
