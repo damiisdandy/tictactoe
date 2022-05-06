@@ -1,0 +1,79 @@
+.Board {
+  position: relative;
+  height: 30rem;
+  width: 30em;
+  background-color: #232323;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  .Tile {
+    background-color: #303030;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 6rem;
+    border-radius: 1rem;
+    transition: $mid-transition;
+    &:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+      background-color: #404040;
+    }
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+  .line {
+    animation-name: line-animation;
+    animation-duration: 500ms;
+    position: absolute;
+    z-index: 10;
+    opacity: 0.8;
+    left: 1rem;
+    background-color: $secondary-color;
+    height: 1.2rem;
+    border-radius: 0.75rem;
+    width: calc(30rem - 2rem);
+    min-width: 28rem;
+    transform-origin: 0 0;
+    &.htop {
+      top: calc(28rem / 6);
+    }
+    &.hmid {
+      top: calc(26rem / 6) + $height-of-tile + 1rem;
+    }
+    &.hbtm {
+      top: calc(28rem / 6) + $height-of-tile * 2 + 1.2rem;
+    }
+    &[class*="v"] {
+      transform: rotate(90deg);
+      top: 1rem;
+    }
+    &.vleft {
+      left: calc(28rem / 6) + 1rem;
+    }
+    &.vmid {
+      left: calc(28rem / 6) + $height-of-tile + 1.6rem;
+    }
+    &.vright {
+      left: calc(28rem / 6) + $height-of-tile * 2 + 2.2rem;
+    }
+    &.dright {
+      transform: rotate(45deg);
+      top: 1rem;
+      left: 1.4rem;
+      width: 39rem;
+    }
+    &.dleft {
+      width: 39rem;
+      transform: rotate(-45deg);
+      transform-origin: 100% 100%;
+      top: 0.7rem;
+      left: -1 * $height-of-tile;
+    }
+  }
+}

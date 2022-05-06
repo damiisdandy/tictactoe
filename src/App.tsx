@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import ChangeName from "./pages/change-name";
+import ChangeAvatar from "./pages/change-avatar";
 import CreateGame from "./pages/game/create";
 import Game from "./pages/game/id";
 import Help from "./pages/help";
@@ -21,7 +21,7 @@ const App: FC = () => {
         <AnimatePresence>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/change-name" element={<ChangeName change />} />
+            <Route path="/change-avatar" element={<ChangeAvatar />} />
             <Route path="/help" element={<Help />} />
             <Route path="/game/create" element={<CreateGame />} />
             <Route path="/game/:id" element={<Game />} />

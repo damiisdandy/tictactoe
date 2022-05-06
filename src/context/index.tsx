@@ -8,14 +8,8 @@ if (!userID) {
   localStorage.setItem("userID", userID);
 }
 
-let userName = localStorage.getItem("userName");
-
 const initialState: Store = {
   id: userID,
-  userName,
-  UI: {
-    showBackdrop: false,
-  },
 };
 
 export const globalContext = createContext<{

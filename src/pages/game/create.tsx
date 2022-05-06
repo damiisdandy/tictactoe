@@ -12,14 +12,18 @@ const CreateGame = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [gameCode, setGameCode] = useState("");
+  const [prevGameCode, setPrevGameCode] = useState(null);
   const { userID } = useUser();
 
   useEffect(() => {
     (async () => {
       try {
         const resData = await axios.post("/game/create", { creator: userID });
-        setGameCode(resData.data.data.code);
-        console.log(resData.data);
+        const gameData = resData.data.data;
+        setGameCode(gameData.code);
+        if (gameData.previousGame) {
+          setPrevGameCode(gameData.previousGame.code);
+        }
       } catch {
         setError(true);
       } finally {
@@ -48,6 +52,11 @@ const CreateGame = () => {
             <FaCheck className="success" />
             <p>share the url below with your opponent</p>
             <Link to={gameURL.replace(siteURL, "")}>{gameURL}</Link>
+            {prevGameCode && (
+              <p className="warning">
+                Previous game <b>{prevGameCode}</b> is deleted
+              </p>
+            )}
           </>
         )}
       </div>

@@ -13,17 +13,11 @@ type WinType =
   | "dleft"
   | "";
 
-interface StoreUI {
-  showBackdrop: boolean;
-}
-
 interface Store {
   id: string | null;
-  userName: string | null;
-  UI: StoreUI
 }
 
-type ActionTypes = 'SET_USERNAME' | 'SET_BACKDROP';
+type ActionTypes = 'CHANGE_AVATAR';
 
 interface Action {
   type: ActionTypes;
@@ -34,17 +28,13 @@ type ReducerType = (state: Store, action: Action) => Store;
 
 type UseUser = () => {
   userID: string | null;
-  userName: string | null;
-  setUserName: (name: string) => void;
+  changeAvatar: (name: string) => void;
 }
 
-type UseUI = () => {
-  UI: StoreUI;
-  setShowBackdrop: (value: boolean) => void;
-}
-
-type UseMutate = (url: string, data: Object) => {
-  loading: boolean;
-  error: boolean;
-  data: Object;
+interface Game {
+  id: string;
+  creator: string;
+  opponent: string;
+  board: string;
+  code: string;
 }

@@ -4,17 +4,16 @@ import { globalContext } from "../context";
 const useUser: UseUser = () => {
   const { state, dispatch } = useContext(globalContext);
 
-  const setUserName = (name: string) => {
+  const changeAvatar = (name: string) => {
     dispatch({
-      type: "SET_USERNAME",
+      type: "CHANGE_AVATAR",
       payload: name,
     });
   };
 
   return {
     userID: state.id,
-    userName: state.userName,
-    setUserName,
+    changeAvatar,
   };
 };
 
