@@ -1,0 +1,16 @@
+.Help {
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 2rem;
+  }
+  ol {
+    li {
+      font-size: 1.7rem;
+      &:not(:last-child) {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}

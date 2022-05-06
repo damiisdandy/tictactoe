@@ -5,14 +5,9 @@ import Layout from "./components/Layout";
 import ChangeAvatar from "./pages/change-avatar";
 import CreateGame from "./pages/game/create";
 import Game from "./pages/game/id";
+import WaitingRoom from "./pages/game/public";
 import Help from "./pages/help";
 import Home from "./pages/home";
-
-// TODO:
-// 1. add OG image (seo)
-// 2. add PWA
-
-// check if all elements of an array are equal
 
 const App: FC = () => {
   return (
@@ -24,6 +19,7 @@ const App: FC = () => {
             <Route path="/change-avatar" element={<ChangeAvatar />} />
             <Route path="/help" element={<Help />} />
             <Route path="/game/create" element={<CreateGame />} />
+            <Route path="/game/public" element={<WaitingRoom />} />
             <Route path="/game/:id" element={<Game />} />
           </Routes>
         </AnimatePresence>
