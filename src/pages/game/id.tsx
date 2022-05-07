@@ -162,6 +162,7 @@ const Game = () => {
     })();
   }, [id, userID]);
 
+  // listeners
   useEffect(() => {
     socket.on("players", (data) => {
       setGameInfo((state) => ({ ...state, ...data }));

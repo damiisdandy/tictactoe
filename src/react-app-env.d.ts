@@ -37,4 +37,6 @@ interface Game {
   opponent: string;
   board: string;
   code: string;
-}
+  creator_score: number;
+  opponent_score: number;
+} 

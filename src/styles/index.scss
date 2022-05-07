@@ -44,8 +44,7 @@ html {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: white;
   width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 .App {
@@ -54,12 +53,12 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
-  overflow: hidden;
   background-color: #151515;
+  padding: 2rem 0;
   .container {
-    width: 30em;
+    width: 25em;
     min-height: 35em;
     display: flex;
     align-items: center;
@@ -70,7 +69,7 @@ html {
     margin: 0 auto;
     background-color: $primary-color;
     color: white;
-    padding: 1rem 3rem;
+    padding: 1rem 2rem;
     border-radius: 0.75rem;
     margin-top: 1rem;
     font-size: 1.8rem;
@@ -90,6 +89,7 @@ html {
       font-size: 2.5rem;
       text-align: center;
       font-weight: 300;
+      margin-bottom: 1rem;
       .letter {
         color: $primary-color;
         font-size: inherit;
