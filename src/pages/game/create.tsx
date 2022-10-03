@@ -2,9 +2,8 @@ import Transition from "../../components/Transition";
 import { ImSpinner9 } from "react-icons/im";
 import { GoAlert } from "react-icons/go";
 import { FaCheck } from "react-icons/fa";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "../../services/axios";
-import { siteURL } from "../../config";
 import useUser from "../../hooks/useUser";
 import { Link } from "react-router-dom";
 
@@ -32,7 +31,6 @@ const CreateGame = () => {
     })();
   }, [userID]);
 
-  const gameURL = useMemo(() => `${siteURL}/game/${gameCode}`, [gameCode]);
   return (
     <Transition>
       <div className="CreateGame">
@@ -51,7 +49,9 @@ const CreateGame = () => {
             <h1>game created</h1>
             <FaCheck className="success" />
             <p>share the url below with your opponent</p>
-            <Link to={gameURL.replace(siteURL, "")}>{gameURL}</Link>
+            <Link
+              to={`/game/${gameCode}`}
+            >{`${window.location.origin}/game/${gameCode}`}</Link>
             {prevGameCode && (
               <p className="warning">
                 Previous game <b>{prevGameCode}</b> is deleted
