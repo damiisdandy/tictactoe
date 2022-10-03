@@ -48,7 +48,7 @@ const CreateGame = () => {
           <>
             <h1>game created</h1>
             <FaCheck className="success" />
-            <p>share the url below with your opponent</p>
+            <p>click the url below to play and share it with your opponent</p>
             <Link
               to={`/game/${gameCode}`}
             >{`${window.location.origin}/game/${gameCode}`}</Link>
